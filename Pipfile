@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 autopep8 = "*"
+flake8 = "*"
+wemake-python-styleguide = "*"
 
 [requires]
 python_version = "3.8"
