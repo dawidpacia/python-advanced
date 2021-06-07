@@ -11,6 +11,7 @@ wemake-python-styleguide = "*"
 requests = "*"
 pytest = "*"
 pytest-xdist = "*"
+pyhamcrest = "*"
 
 [requires]
 python_version = "3.8"
