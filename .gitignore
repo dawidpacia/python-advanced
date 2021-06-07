@@ -1,2 +1,6 @@
 .idea
 git_test
+.pytest_cache
+*.log
+__pycache__
+test.*

@@ -9,6 +9,9 @@ verify_ssl = true
 autopep8 = "*"
 flake8 = "*"
 wemake-python-styleguide = "*"
+requests = "*"
+pytest = "*"
+pytest-xdist = "*"
 
 [requires]
 python_version = "3.8"
