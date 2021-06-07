@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 autopep8 = "*"
-flake8 = "*"
 wemake-python-styleguide = "*"
 requests = "*"
 pytest = "*"
