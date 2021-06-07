@@ -1,5 +1,6 @@
+from hamcrest import assert_that, contains_string, equal_to, has_key
 import requests
-from hamcrest import *
+
 
 URL = "https://reqres.in/api"
 LOGIN_URL = f"{URL}/login/"
