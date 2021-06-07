@@ -8,7 +8,6 @@ STATUS_CODE_OK, STATUS_CODE_NOT_FOUND = 200, 400
 def test_login_valid():
     json_body = {"email": "eve.holt@reqres.in", "password": "cityslicka"}
     resp = requests.post(LOGIN_URL, data=json_body)
-    print(resp.text)
     assert resp.status_code == STATUS_CODE_OK
     assert "token" in resp.json()
 
