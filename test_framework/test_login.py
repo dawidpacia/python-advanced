@@ -1,87 +1,26 @@
-import pytest
 import requests
-import json
-import logging
-import time
+
+LOGIN_URL = "https://reqres.in/api"
+LOGIN_LOGIN_URL = f"{LOGIN_URL}/login/"
+STATUS_CODE_OK, STATUS_CODE_NOT_FOUND = 200, 400
 
 
-def test_login_valid(supply_url):
-    logging.info("XXXXXXXXXXXXXXXXXXXXXXXXXX")
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com", "password": "something"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 200, resp.text
-    assert j["token"] == "QpwL5tke4Pnpja7X", resp.text
+def test_login_valid():
+    json_body = {"email": "test@test.com", "password": "something"}
+    resp = requests.post(LOGIN_URL, data=json_body)
+    assert resp.status_code == STATUS_CODE_OK
+    assert resp.json()["token"] == "QpwL5tke4Pnpja7X"
 
 
-def test_login_no_password(supply_url):
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing password", resp.text
+def test_login_no_password():
+    json_body = {"email": "test@test.com"}
+    resp = requests.post(LOGIN_URL, data=json_body)
+    assert resp.status_code == STATUS_CODE_NOT_FOUND
+    assert resp.json()["error"] == "Missing password"
 
 
-def test_login_no_email(supply_url):
-    url = supply_url + "/login/"
-    data = {}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing email or username", resp.text
-
-
-def test_login_valid4(supply_url):
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com", "password": "something"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 200, resp.text
-    assert j["token"] == "QpwL5tke4Pnpja7X", resp.text
-
-
-def test_login_no_password4(supply_url):
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing password", resp.text
-
-
-def test_login_no_email4(supply_url):
-    url = supply_url + "/login/"
-    data = {}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing email or username", resp.text
-
-
-def test_login_valid1(supply_url):
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com", "password": "something"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 200, resp.text
-    assert j["token"] == "QpwL5tke4Pnpja7X", resp.text
-
-
-def test_login_no_password2(supply_url):
-    url = supply_url + "/login/"
-    data = {"email": "test@test.com"}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing password", resp.text
-
-
-def test_login_no_email3(supply_url):
-    url = supply_url + "/login/"
-    data = {}
-    resp = requests.post(url, data=data)
-    j = json.loads(resp.text)
-    assert resp.status_code == 400, resp.text
-    assert j["error"] == "Missing email or username", resp.text
+def test_login_no_email():
+    json_body = {}
+    resp = requests.post(LOGIN_URL, data=json_body)
+    assert resp.status_code == STATUS_CODE_NOT_FOUND
+    assert resp.json()["error"] == "Missing email or username"
