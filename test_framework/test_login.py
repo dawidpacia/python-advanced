@@ -1,15 +1,16 @@
 import requests
 
-LOGIN_URL = "https://reqres.in/api"
-LOGIN_LOGIN_URL = f"{LOGIN_URL}/login/"
+URL = "https://reqres.in/api"
+LOGIN_URL = f"{URL}/login/"
 STATUS_CODE_OK, STATUS_CODE_NOT_FOUND = 200, 400
 
 
 def test_login_valid():
-    json_body = {"email": "test@test.com", "password": "something"}
+    json_body = {"email": "eve.holt@reqres.in", "password": "cityslicka"}
     resp = requests.post(LOGIN_URL, data=json_body)
+    print(resp.text)
     assert resp.status_code == STATUS_CODE_OK
-    assert resp.json()["token"] == "QpwL5tke4Pnpja7X"
+    assert "token" in resp.json()
 
 
 def test_login_no_password():
